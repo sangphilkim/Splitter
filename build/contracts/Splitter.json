@@ -1,0 +1,143 @@
+{
+  "contract_name": "Splitter",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "recipient1",
+          "type": "address"
+        },
+        {
+          "name": "recipient2",
+          "type": "address"
+        }
+      ],
+      "name": "splitFunds",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "killMe",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogSplitReceived",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogFundsSent",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b60008054600160a060020a03191633600160a060020a03161790555b5b6103588061003c6000396000f300606060405263ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416632accf2f781146100535780638da5cb5b14610081578063b603cd80146100b0575b600080fd5b61006d600160a060020a03600435811690602435166100c5565b604051901515815260200160405180910390f35b341561008c57600080fd5b61009461024f565b604051600160a060020a03909116815260200160405180910390f35b34156100bb57600080fd5b6100c361025e565b005b60008054819033600160a060020a039081169116146100e357600080fd5b3415156100ef57600080fd5b50347f3de5899c9daefa1a7be9743d332937e49dda8a4aa34e2058c619f365595632363382604051600160a060020a03909216825260208201526040908101905180910390a16002345b061561014457600019015b7f1280f98479a31aac0a9c39a97628dcec78be65dd2dfde25980cc75d8e6a5138f846002835b04604051600160a060020a03909216825260208201526040908101905180910390a1600160a060020a0384166108fc6002835b049081150290604051600060405180830381858888f1935050505015156101c357600080fd5b7f1280f98479a31aac0a9c39a97628dcec78be65dd2dfde25980cc75d8e6a5138f846002835b04604051600160a060020a03909216825260208201526040908101905180910390a1600160a060020a0383166108fc6002835b049081150290604051600060405180830381858888f19350505050151561024257600080fd5b600191505b5b5092915050565b600054600160a060020a031681565b60005433600160a060020a0390811691161461027957600080fd5b600030600160a060020a031631111561031a576000547f1280f98479a31aac0a9c39a97628dcec78be65dd2dfde25980cc75d8e6a5138f90600160a060020a0390811690301631604051600160a060020a03909216825260208201526040908101905180910390a1600054600160a060020a039081169030163180156108fc0290604051600060405180830381858888f19350505050151561031a57600080fd5b5b600054600160a060020a0316ff5b5b5600a165627a7a723058202599b255af24ea8f51788c3a726fa768b3e48ceb8979e59b6107bb8804c9c92a0029",
+  "networks": {
+    "1503435268553": {
+      "events": {
+        "0x5861cc23de8cab7630160dc0ee2c1e9aa2a0f1498f73c387807c0100e6684da7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "receiverOne",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "receiverTwo",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "splitmoney",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogSplit",
+          "type": "event"
+        },
+        "0xe7c6f51e34c8019c8897479bdad353f601a7fbb84f0b3ddae72f7bf571ff9929": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogCashOut",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x346679fbd473d036c0188d8fe08775ca4148577d",
+      "updated_at": 1503435403473
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1503438711719
+}
