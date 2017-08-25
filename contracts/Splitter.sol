@@ -1,46 +1,63 @@
+pragma solidity ^0.4.10;
 
-pragma solidity ^0.4.6;
+contract Owned {
 
-contract Splitter {
-  address public owner;
+    address owner;
 
-  event LogSplitReceived(address sender, uint amount);
-  event LogFundsSent(address recipient, uint amount);
+    function Owned() {
+        owner = msg.sender;
+    }
+}
 
-  function Splitter() {
-    owner = msg.sender;
-  }
+contract Splitter is Owned {
 
-  modifier onlyMe() {
-    require( msg.sender == owner );
-    _;
-  }
+    mapping(address => uint) public balances;
 
-  function splitFunds(address recipient1, address recipient2) public onlyMe() payable returns(bool success) {
-    if(msg.value == 0) revert();
+    event LogSplitMoney(address sender, address receiver, uint split);
+    event LogMoneySend(address sender, uint amount);
 
-    uint amountSplit = msg.value;
+    function splitMoney(address receiver1, address receiver2)
+        public
+        payable
+        returns (bool success) {
+            if(msg.value == 0) throw;
 
-    LogSplitReceived(msg.sender, msg.value);
+            uint totalMoney = msg.value;
+            uint splitMoney;
 
-    if ( msg.value % 2 != 0 ) {
-      amountSplit -= 1;
+            if(totalMoney %2 == 1) {
+                totalMoney -= 1;
+                balances[msg.sender] += 1;
+            }
+
+            splitMoney = totalMoney / 2;
+
+            balances[receiver1] += splitMoney;
+            balances[receiver2] += splitMoney;
+
+            LogSplitMoney(msg.sender, receiver1, splitMoney);
+            LogSplitMoney(msg.sender, receiver2, splitMoney);
+
+            return true;
     }
 
-    LogFundsSent(recipient1, amountSplit / 2);
-    recipient1.transfer(amountSplit / 2);
+    function withdrawMoney()
+        public
+        returns (bool success) {
+            if(balances[msg.sender] > 0) throw;
 
-    LogFundsSent(recipient1, amountSplit / 2);
-    recipient2.transfer(amountSplit / 2);
+            uint amount = balances[msg.sender];
+            msg.sender.transfer(amount);
 
-    return true;
-  }
+            LogMoneySend(msg.sender, amount);
 
-  function killMe() public onlyMe() {
-    if (this.balance > 0) {
-      LogFundsSent(owner, this.balance);
-      owner.transfer(this.balance);
+            return true;
     }
-    suicide(owner);
-  }
+
+    function killSwitch()
+        returns (bool success){
+            require(msg.sender == owner);
+            selfdestruct(owner);
+            return true;
+    }
 }
